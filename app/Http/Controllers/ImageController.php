@@ -14,13 +14,22 @@ class ImageController extends Controller
 {
     public function getImage(Request $request)
     {
-        $all = $request->json();
-
-        echo "<pre>";
-        print_r($all);
-        echo "</pre>";
-
+        if($request->ajax()){
+            return 'ajax get request';
+        }
     }
 
+
+
+    public function postImage(Request $request)
+    {
+        $all = $request->all();
+
+            if($request->ajax()){
+
+                return $all;
+
+        }
+    }
 
 }

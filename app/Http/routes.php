@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 
 
-Route::post('/',  ['as'=>'main', 'uses' => 'ImageController@getImage']);
+Route::get('/photos',  ['as'=>'photos', 'uses' => 'ImageController@getImage']);
+Route::post('/photos',  ['as'=>'photos', 'uses' => 'ImageController@postImage']);
