@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+
+Route::post('/',  ['as'=>'main', 'uses' => 'ImageController@getImage']);
