@@ -1,92 +1,59 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="csrf-token" content="{!! csrf_token() !!}" />
+    <meta name="csrf-token" content="{!! csrf_token() !!}"/>
     <title>Document</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="js/lib/jquery-1.11.1.js"></script>
-    <script src="js/lib/jquery.js"></script>
-    <script src="js/dist/jquery.validate.js"></script>
-    <script src="js/dist/additional-methods.js"></script>
+    <link rel="stylesheet" media="screen" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.min.css">
+
 </head>
 <body>
-    <div class="container">
-        <a href="#" id="get">Get</a>
-        <hr>
+<div class="container">
+    <a href="#" id="get">Get</a>
+    <hr>
 
-        {!! Form::open(array('url' => '#', 'method' => 'post', 'files' => true, 'id' => 'fileForm', 'class'=>'img-form')) !!}
-            <p>
-                <label for="">name</label>
-                <input type="text" name="name">
-            </p>
-            <p>
-                <label for="file4">Select any audio or image file</label>
-                <input type="file" id="file4" class="required" name="file4[]" multiple="multiple" accept="image/*,audio/*">
-            </p>
-            <p>
-                <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-                <button type="submit">Submit</button>
-            </p>
+    {!! Form::open(array('url' => '#', 'method' => 'post', 'files' => true, 'id' => 'commentForm', 'class'=>'cmxform')) !!}
+    <p>
+        <label for="jungle">Выберите категорию</label>
+        <br>
+        <select id="jungle" name="jungle" title="Выберите категорию" required>
+            <option value=""></option>
+            <option value="1">Свадьбы</option>
+            <option value="2">Юбилеи</option>
+            <option value="3">Дни рождения</option>
+        </select>
+    </p>
+    <p>
+        <label for="cname">Название фотографии</label><br>
+        <input type="text" id="cname" minlength="2" class="ui-widget-content" name="name"
+               title="Укажите название фотографии" required>
+    </p>
 
-        {!! Form::close() !!}
-    </div>
+    <p>
+        <label for="file4">Выберите одно или несколько изображений</label><br>
+        <input type="file" id="file4" class="ui-widget-content" name="file4[]" multiple="multiple"
+               accept="image/*,audio/*" title="Выберите фотографии"  required >
+    </p>
 
-    <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+    <p>
+        <label for="ccomment">Описание фотографии</label><br>
+        <textarea id="ccomment" class="ui-widget-content" name="comment" title="Поле описание должно быть заполнено"
+                  required></textarea>
+    </p>
 
-        });
+    <p>
+        <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+        <button type="submit">Добавить</button>
+    </p>
 
-        $(document).ready(function() {
+    {!! Form::close() !!}
+</div>
 
-            $("#fileForm").validate();
+<script src="js/lib/jquery.js"></script>
+<script src="js/dist/jquery.validate.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+<script src="js/dist/main_validation.js"></script>
+<script src="js/main_ajax.js"></script>
 
-            $('#get').click(function(e) {
-                e.preventDefault();
-
-                    // ajax get
-                    $.get( "photos", function( data ) {
-                        console.log(data);
-                    });
-            });
-
-            $('form').submit(function(e) {
-                e.preventDefault();
-
-                var data = new FormData();
-                $.each($('#file4')[0].files, function(i, file) {
-                    data.append('file-'+i, file);
-                });
-
-                //post ajax
-                $.ajax('photos',
-                        {
-                            url: '/photos',
-                            data: data,
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            type: 'POST',
-                            xhr: function() {
-                                var xhr = $.ajaxSettings.xhr();
-                                xhr.upload.onprogress = function(e) {
-                                    console.log(Math.floor(e.loaded / e.total *100) + '%');
-                                };
-                                return xhr;
-                            },
-                            success: function(data){
-//                                alert(data);
-                                console.log(data);
-                            }
-                        },
-                        function(data){
-
-                });
-            });
-        });
-    </script>
 </body>
 </html>
