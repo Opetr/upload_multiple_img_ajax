@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 
 class ImageController extends Controller
@@ -23,11 +24,25 @@ class ImageController extends Controller
 
     public function postImage(Request $request)
     {
-        $all = $request->all();
+        $images = $request->all();
 
             if($request->ajax()){
 
-                return $all;
+              foreach($images as $image) {
+
+                  $image_name = time().$image->getClientOriginalName();
+
+                  print_r($image_name);
+
+                  $flag_upload = $image->move('img/uploads', $image_name);
+
+                  if($flag_upload){
+                      $uploaded_images[] = $image_name;
+                  }
+              }
+//                print_r($uploaded_images);
+
+                return \Response::json(['success'=>true, 'message'=>'images uploaded', 'images'=>$uploaded_images]);
 
         }
     }

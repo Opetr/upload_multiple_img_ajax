@@ -11,9 +11,14 @@
         <a href="#" id="get">Get</a>
         <hr>
 
-        <form action="#">
+        <form action="#" enctype="multipart/form-data">
             <label for="">name</label>
             <input type="text" name="name">
+            <br>
+            <br>
+            <input type="file" id="images" name="images[]" multiple="multiple">
+            <br>
+            <br>
             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <button type="submit">Submit</button>
         </form>
@@ -23,13 +28,12 @@
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(data) {
-                alert(data.data.key1); // or data.data['key1'] (?)
             }
+
         });
 
         $(document).ready(function() {
+
             $('#get').click(function(e) {
                 e.preventDefault();
 
@@ -42,11 +46,34 @@
             $('form').submit(function(e) {
                 e.preventDefault();
 
-                var name = $(this).find('input[name=name]').val();
+                var data = new FormData();
+                $.each($('#images')[0].files, function(i, file) {
+                    data.append('file-'+i, file);
+                });
 
                 //post ajax
-                $.post('photos', {name: name}, function(data){
-                    console.log(data);
+                $.ajax('photos',
+                        {
+                            url: '/photos',
+                            data: data,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            type: 'POST',
+                            xhr: function() {
+                                var xhr = $.ajaxSettings.xhr();
+                                xhr.upload.onprogress = function(e) {
+                                    console.log(Math.floor(e.loaded / e.total *100) + '%');
+                                };
+                                return xhr;
+                            },
+                            success: function(data){
+//                                alert(data);
+                                console.log(data);
+                            }
+                        },
+                        function(data){
+
                 });
             });
         });
