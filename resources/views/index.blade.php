@@ -17,10 +17,10 @@
         <label for="jungle">Выберите категорию</label>
         <br>
         <select id="jungle" name="jungle" title="Выберите категорию" required>
-            <option value=""></option>
-            <option value="1">Свадьбы</option>
-            <option value="2">Юбилеи</option>
-            <option value="3">Дни рождения</option>
+            <option value="">Выбрать категорию</option>
+            <option value="1">Категория 1</option>
+            <option value="2">Категория 2</option>
+            <option value="3">Категория 3</option>
         </select>
     </p>
     <p>

@@ -1,7 +1,7 @@
 
 $.validator.setDefaults({
     submitHandler: function() {
-        alert("Фотографии сохранены!");
+        alert("Изображения сохранены!");
     },
     showErrors: function(map, list) {
         // there's probably a way to simplify this
@@ -29,7 +29,7 @@ $.validator.setDefaults({
 $(document).ready(function () {
     (function() {
         // use custom tooltip; disable animations for now to work around lack of refresh method on tooltip
-        $("#commentForm, #signupForm").tooltip({
+        $("#commentForm").tooltip({
             show: false,
             hide: false
         });
