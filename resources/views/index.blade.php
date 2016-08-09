@@ -25,20 +25,17 @@
     </p>
     <p>
         <label for="cname">Название фотографии</label><br>
-        <input type="text" id="cname" minlength="2" class="ui-widget-content" name="name"
-               title="Укажите название фотографии" required>
+        <input type="text" id="cname" minlength="2" class="ui-widget-content" name="name" title="" required>
     </p>
 
     <p>
         <label for="file4">Выберите одно или несколько изображений</label><br>
-        <input type="file" id="file4" class="ui-widget-content" name="file4[]" multiple="multiple"
-               accept="image/*,audio/*" title="Выберите фотографии"  required >
+        <input type="file" id="file4" class="ui-widget-content" name="file4[]" multiple="multiple" accept="image/*,audio/*" title=""  required >
     </p>
 
     <p>
         <label for="ccomment">Описание фотографии</label><br>
-        <textarea id="ccomment" class="ui-widget-content" name="comment" title="Поле описание должно быть заполнено"
-                  required></textarea>
+        <textarea id="ccomment" class="ui-widget-content" name="comment" title="" required></textarea>
     </p>
 
     <p>
@@ -49,11 +46,11 @@
     {!! Form::close() !!}
 </div>
 
-<script src="js/lib/jquery.js"></script>
-<script src="js/dist/jquery.validate.js"></script>
-<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-<script src="js/dist/main_validation.js"></script>
-<script src="js/main_ajax.js"></script>
+<script id="LibScript" src="js/lib/jquery.js"></script>
+<script id="jQScript" src="js/dist/jquery.validate.js"></script>
+<script id="additScript" src="js/dist/additional-methods.js"></script>
+<script id="QScript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 
+<script id="ShareScript" src="js/main_ajax.js"></script>
 </body>
 </html>

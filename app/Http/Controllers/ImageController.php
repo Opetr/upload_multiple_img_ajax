@@ -41,7 +41,7 @@ class ImageController extends Controller
                   }
               }
 //                print_r($uploaded_images);
-
+                dd();
                 return \Response::json(['success'=>true, 'message'=>'images uploaded', 'images'=>$uploaded_images]);
 
         }
